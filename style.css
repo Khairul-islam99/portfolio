@@ -1,0 +1,67 @@
+/* Hide default cursor for links */
+body { cursor: none; }
+a, button, input, textarea { cursor: none !important; }
+
+/* Custom Mouse Cursor Styling */
+.cursor-dot {
+    width: 8px; height: 8px;
+    background-color: #38bdf8;
+    border-radius: 50%; position: fixed;
+    top: 0; left: 0; transform: translate(-50%, -50%);
+    pointer-events: none; z-index: 9999;
+    transition: width 0.2s, height 0.2s;
+}
+
+.cursor-outline {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(56, 189, 248, 0.5);
+    border-radius: 50%; position: fixed;
+    top: 0; left: 0; transform: translate(-50%, -50%);
+    pointer-events: none; z-index: 9998;
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+/* Hover effect for custom cursor */
+.cursor-hover .cursor-dot { width: 0px; height: 0px; }
+.cursor-hover .cursor-outline {
+    width: 60px; height: 60px;
+    background-color: rgba(56, 189, 248, 0.1);
+    border-color: #38bdf8;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #020617; } 
+::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+
+/* NEW: Plexus Canvas Style (Faded on Left, Visible on Right) */
+#plexus-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    /* This makes it look like it's only on one side */
+    mask-image: linear-gradient(to right, transparent 0%, black 60%, black 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 40%, black 100%);
+}
+
+/* Scroll Reveal Classes */
+.reveal { 
+    opacity: 0; 
+    transform: translateY(30px); 
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); 
+}
+.reveal.active { 
+    opacity: 1; 
+    transform: translateY(0); 
+}
+
+/* Typewriter */
+.cursor::after { 
+    content: '|'; 
+    animation: blink 1s step-start infinite; 
+    color: #38bdf8; 
+}
+@keyframes blink { 50% { opacity: 0; } }
