@@ -1,67 +1,66 @@
-/* Hide default cursor for links */
+/* Core setup */
 body { cursor: none; }
-a, button, input, textarea { cursor: none !important; }
+a, button, input, textarea, .interactable { cursor: none !important; }
 
-/* Custom Mouse Cursor Styling */
+/* Light mode cursor (Red) */
 .cursor-dot {
-    width: 8px; height: 8px;
-    background-color: #38bdf8;
+    width: 6px; height: 6px;
+    background-color: #dc2626; /* red-600 */
     border-radius: 50%; position: fixed;
     top: 0; left: 0; transform: translate(-50%, -50%);
-    pointer-events: none; z-index: 9999;
-    transition: width 0.2s, height 0.2s;
+    pointer-events: none; z-index: 10000;
+    transition: width 0.2s, height 0.2s, background-color 0.5s;
 }
 
 .cursor-outline {
-    width: 40px; height: 40px;
-    border: 1px solid rgba(56, 189, 248, 0.5);
+    width: 30px; height: 30px;
+    border: 1px solid rgba(220, 38, 38, 0.5); /* red-600 */
     border-radius: 50%; position: fixed;
     top: 0; left: 0; transform: translate(-50%, -50%);
-    pointer-events: none; z-index: 9998;
-    transition: width 0.2s, height 0.2s, background-color 0.2s;
+    pointer-events: none; z-index: 9999;
+    transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.5s;
 }
 
-/* Hover effect for custom cursor */
+/* Dark mode cursor (Sky Blue) */
+.dark .cursor-dot { background-color: #38bdf8; } /* sky-400 */
+.dark .cursor-outline { border-color: rgba(56, 189, 248, 0.5); }
+
+/* Hover effect */
 .cursor-hover .cursor-dot { width: 0px; height: 0px; }
 .cursor-hover .cursor-outline {
     width: 60px; height: 60px;
-    background-color: rgba(56, 189, 248, 0.1);
+    background-color: rgba(220, 38, 38, 0.05);
+    border-color: #dc2626;
+}
+.dark .cursor-hover .cursor-outline {
+    background-color: rgba(56, 189, 248, 0.05);
     border-color: #38bdf8;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #020617; } 
-::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+::-webkit-scrollbar-track { background: transparent; } 
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+.dark ::-webkit-scrollbar-thumb { background: #334155; }
+::-webkit-scrollbar-thumb:hover { background: #dc2626; }
+.dark ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
 
-/* NEW: Plexus Canvas Style (Faded on Left, Visible on Right) */
-#plexus-canvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    z-index: 0;
-    pointer-events: none;
-    /* This makes it look like it's only on one side */
-    mask-image: linear-gradient(to right, transparent 0%, black 60%, black 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 40%, black 100%);
-}
-
-/* Scroll Reveal Classes */
+/* Smooth Reveal Animations */
 .reveal { 
     opacity: 0; 
-    transform: translateY(30px); 
-    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); 
+    transform: translateY(40px); 
+    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); 
 }
 .reveal.active { 
     opacity: 1; 
     transform: translateY(0); 
 }
 
-/* Typewriter */
-.cursor::after { 
+/* Typewriter Blinking Cursor */
+.cursor-type::after { 
     content: '|'; 
     animation: blink 1s step-start infinite; 
-    color: #38bdf8; 
+    color: #dc2626; 
 }
+.dark .cursor-type::after { color: #38bdf8; }
 @keyframes blink { 50% { opacity: 0; } }
